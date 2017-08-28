@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.web.WebView?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="browser.Controller">
+   <top>
+      <ToolBar minWidth="200.0" prefHeight="35.0" prefWidth="789.0" BorderPane.alignment="CENTER">
+        <items>
+            <HBox prefHeight="25.0" prefWidth="779.0" spacing="5.0">
+               <children>
+                  <TextField id="addressBar" fx:id="addressBar" alignment="TOP_LEFT" promptText="www.website.com" HBox.hgrow="ALWAYS" />
+                <Button fx:id="btnGo" mnemonicParsing="false" onAction="#go" text="Go" />
+                  <Button fx:id="addNewTab" mnemonicParsing="false" onAction="#addTab" text="+" />
+                  <Button fx:id="refresh" mnemonicParsing="false" onAction="#refresh" text=".." />
+               </children>
+            </HBox>
+        </items>
+      </ToolBar>
+   </top>
+   <center>
+      <TabPane fx:id="tabs" prefWidth="797.0" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Google">
+               <content>
+                  <WebView fx:id="web" prefHeight="362.0" prefWidth="791.0" />
+               </content>
+          </Tab>
+        </tabs>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </TabPane>
+   </center>
+</BorderPane>

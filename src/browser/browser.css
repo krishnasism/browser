@@ -1,0 +1,24 @@
+#addressBar
+{
+    -fx-width:100%;
+    -fx-padding-left:20;
+}
+.text-field {
+    -fx-background-color:white;
+}
+
+.button
+{
+    -fx-background-color:white;
+    -fx-background-radius:30;
+}
+.tab
+{
+    -fx-background-color:#F5F5F5;
+    -fx-font-family:monospace;
+    -fx-background-radius:5;
+}
+.tab:hover
+{
+    -fx-background-color:#E0E0E0;
+}
