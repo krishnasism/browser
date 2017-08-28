@@ -22,8 +22,7 @@ public class Browser extends Application {
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Button btn = new Button();
-       
+      
         Parent root = FXMLLoader.load(getClass().getResource("Browser.fxml"));
         
         Scene scene = new Scene(root);
