@@ -1,13 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+ * A simple JavaFX browser!
+*/
 package browser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.concurrent.Worker;
@@ -26,6 +25,7 @@ import javafx.scene.web.WebView;
  *
  * @author Krishnasis
  */
+/*Go Button is pressed*/
 public class Controller implements Initializable 
 {
     String htlink="";
@@ -55,7 +55,7 @@ public class Controller implements Initializable
     
     @FXML
     Button back, forward, viewSource;
-    public void go(ActionEvent event)
+    public void go(ActionEvent event) throws IOException
     {
         //current stuff - newly added other than default new tab.
         current = new WebView(); 
@@ -69,10 +69,21 @@ public class Controller implements Initializable
         currentEngine = current.getEngine();
         
         addressLink = addressBar.getText().toString();
+        
         if(!addressLink.contains("http"))
         {
-            addressLink = "http://"+addressLink;
+           
+            
+            if(checkUrlExists("http://"+addressLink))
+            {   
+                    addressLink = "http://"+addressLink;
+            }
+            else
+            {
+                    addressLink = "https://www.google.co.in/search?q="+addressLink;
+            }
         }
+
         //load site
         currentEngine.load(addressLink);
         currentEngine.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.86 Safari/537.36");
@@ -82,7 +93,7 @@ public class Controller implements Initializable
         setName();  
         listenToChange(); 
     }
-
+    /*Start of browser*/
     @Override
     public void initialize(URL location, ResourceBundle resources) 
     {
@@ -100,7 +111,7 @@ public class Controller implements Initializable
      
 
     }
-    
+    /*Listen to changes in activity*/
     public void listenToChange()
     {
            tabs.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {            
@@ -128,7 +139,7 @@ public class Controller implements Initializable
            
            setName();
     }
-    
+    /*Add Tab Button*/
     public void addTab(ActionEvent event)
     {
         
@@ -142,11 +153,12 @@ public class Controller implements Initializable
         tabs.getTabs().add(tab);  
         updateAdBar(currentEngine.getLocation().toString());        
     }
+    /*Add new Tab for source viewing : Default is Google for now*/
     public void addTab(String code)
     {
         
         Tab tab = new Tab();
-        tab.setText("New Tab");
+        tab.setText("Source Code");
        
         WebView newTab = new WebView();
         WebEngine newTabEngine = newTab.getEngine();
@@ -156,13 +168,14 @@ public class Controller implements Initializable
         updateAdBar(currentEngine.getLocation().toString());        
     }
     
-    
+    /*Set Tab Name*/
     public void setTabName(String name)
     {
         currentTab.setText(name);
         updateAdBar(currentEngine.getLocation().toString());
 
     }
+    /*Refresh Page*/
     @FXML
     public void refresh()
     {
@@ -172,7 +185,7 @@ public class Controller implements Initializable
 
        
     }
-    
+    /*Set Name of Tab*/
     public void setName()
     {
         currentEngine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
@@ -184,22 +197,26 @@ public class Controller implements Initializable
         });   
     }
     
+    /*back button is pressed*/
     @FXML
     public void backBtnPressed()
     {
                 currentEngine.executeScript("history.back()");
                 updateAdBar(currentEngine.getLocation().toString());
     }
+    /*Forward button is pressed*/
     @FXML
     public void forwardBtnPressed()
     {
         currentEngine.executeScript("history.forward()");
         updateAdBar(currentEngine.getLocation().toString());
     }
+    /*Update the address bar*/
     public void updateAdBar(String address)
     {
              addressBar.setText(address);
     }
+    /*View Source of website*/
     @FXML
     public void viewSource()throws IOException
     {
@@ -222,6 +239,25 @@ public class Controller implements Initializable
             ir.close();   
         }
     }
-     
-    
+    /*Check if URL exists */
+    public boolean checkUrlExists(String url)throws IOException
+        {
+               URL urlToCheck = new URL(url);
+               HttpURLConnection huc = (HttpURLConnection) urlToCheck.openConnection();
+               huc.setRequestMethod("GET");
+               int code;
+               try
+               {
+                   huc.connect();
+                   code =huc.getResponseCode();
+               }
+               catch(Exception e) //url does not exist
+               {
+                   code = -1232; //please don't judge
+               }
+            
+              if(code==-1232)
+                  return false;
+              return true;
+        }
 }
