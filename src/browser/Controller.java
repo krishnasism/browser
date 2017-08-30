@@ -6,7 +6,6 @@
 package browser;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
@@ -18,7 +17,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import java.util.List;
+
 
 /**
  *
@@ -51,8 +50,8 @@ public class Controller implements Initializable
     
     String refreshLink="";
     
-    List history = new ArrayList();    
-    
+    @FXML
+    Button back, forward;
     public void go(ActionEvent event)
     {
         //current stuff - newly added other than default new tab.
@@ -78,10 +77,6 @@ public class Controller implements Initializable
         //if site has finished loading!
         setName();  
         listenToChange(); 
-        
-        
-
-
     }
 
     @Override
@@ -108,8 +103,17 @@ public class Controller implements Initializable
                  current=(WebView)currentTab.getContent(); //get the webview associated with current tab
                  currentEngine = current.getEngine(); 
                  System.out.println(currentEngine.getTitle().toString());
-                 
-            });           
+            });       
+           currentEngine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
+             {
+                if(oldState != newState)
+                {
+                    System.out.println("haxx");
+                }
+            }
+        });   
+           
+           
            setName();
     }
     
@@ -126,6 +130,7 @@ public class Controller implements Initializable
         tabs.getTabs().add(tab);  
         
     }
+    
     
     public void setTabName(String name)
     {
@@ -150,7 +155,16 @@ public class Controller implements Initializable
         });   
     }
     
-    
+    @FXML
+    public void backBtnPressed()
+    {
+                currentEngine.executeScript("history.back()");
+    }
+    @FXML
+    public void forwardBtnPressed()
+    {
+        currentEngine.executeScript("history.forward()");
+    }
     
      
     

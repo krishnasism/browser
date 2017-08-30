@@ -12,6 +12,11 @@
     -fx-background-color:white;
     -fx-background-radius:30;
 }
+.button:hover
+{
+    -fx-background-color:#EEEEEE;
+    -fx-background-radius:30;
+}
 .tab
 {
     -fx-background-color:#F5F5F5;

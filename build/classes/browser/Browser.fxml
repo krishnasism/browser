@@ -16,10 +16,12 @@
         <items>
             <HBox prefHeight="25.0" prefWidth="779.0" spacing="5.0">
                <children>
+                  <Button fx:id="back" mnemonicParsing="false" onAction="#backBtnPressed" text="&lt;" />
+                  <Button fx:id="forward" mnemonicParsing="false" onAction="#forwardBtnPressed" text="&gt;" />
+                  <Button fx:id="refresh" mnemonicParsing="false" onAction="#refresh" text=".." />
                   <TextField id="addressBar" fx:id="addressBar" alignment="TOP_LEFT" promptText="www.website.com" HBox.hgrow="ALWAYS" />
                 <Button fx:id="btnGo" mnemonicParsing="false" onAction="#go" text="Go" />
                   <Button fx:id="addNewTab" mnemonicParsing="false" onAction="#addTab" text="+" />
-                  <Button fx:id="refresh" mnemonicParsing="false" onAction="#refresh" text=".." />
                </children>
             </HBox>
         </items>
