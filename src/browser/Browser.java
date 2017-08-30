@@ -27,7 +27,7 @@ public class Browser extends Application {
         
         Scene scene = new Scene(root);
         
-        primaryStage.setTitle("Browser FX");
+        primaryStage.setTitle("Krishnasis FX");
         primaryStage.setFullScreen(true);
         
         scene.getStylesheets().add(getClass().getResource("browser.css").toExternalForm());

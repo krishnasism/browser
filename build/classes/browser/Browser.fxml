@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.web.WebView?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="browser.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="794.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="browser.Controller">
    <top>
       <ToolBar minWidth="200.0" prefHeight="35.0" prefWidth="789.0" BorderPane.alignment="CENTER">
         <items>
@@ -22,6 +22,7 @@
                   <TextField id="addressBar" fx:id="addressBar" alignment="TOP_LEFT" promptText="www.website.com" HBox.hgrow="ALWAYS" />
                 <Button fx:id="btnGo" mnemonicParsing="false" onAction="#go" text="Go" />
                   <Button fx:id="addNewTab" mnemonicParsing="false" onAction="#addTab" text="+" />
+                  <Button fx:id="viewSource" mnemonicParsing="false" onAction="#viewSource" text="Source" />
                </children>
             </HBox>
         </items>
